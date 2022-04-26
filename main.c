@@ -1,12 +1,11 @@
 #include<stdio.h>
 
-int main(int argc, unsigned char *argv[]){
+void printCode(unsigned char *argv[]){
 	int size = 4;
-
 	if(argv[1][0] < 128){
 		size = 1;
 	}else if(argv[1][0] >= 192 && argv[1][0] < 224){
-		size = 2;	
+		size = 2;
 	}else if(argv[1][0] >= 224 && argv[1][0] < 240){
 		size = 3;
 	}else if(argv[1][0] >= 240 && argv[1][0] < 248){
@@ -16,6 +15,11 @@ int main(int argc, unsigned char *argv[]){
 		printf("%u ", argv[1][i]);
 	}
 	printf("\n");
+}
+
+
+int main(int argc, unsigned char *argv[]){
+	printCode(&argv[0]);
 
 	return 0;
 }
