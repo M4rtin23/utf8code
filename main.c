@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-char* getFromChar(unsigned char *argv[]){
+unsigned char* getFromChar(unsigned char *argv[]){
 	unsigned char values[4] = {0,0,0,0};
 	unsigned char *val_ptr = values;
 
@@ -20,7 +20,7 @@ char* getFromChar(unsigned char *argv[]){
 	return val_ptr;
 }
 
-char* getFromInt(int argc, unsigned char *argv[]){
+unsigned char* getFromInt(int argc, unsigned char *argv[]){
 	unsigned char values[4] = {0,0,0,0};
 	unsigned char *val_ptr = values;
 
@@ -45,7 +45,28 @@ void printCharacter(unsigned char code[]){
 }
 
 int main(int argc, unsigned char *argv[]){
-	printCode(getFromChar(&argv[0]));
+	_Bool isChar = 1, showMessage = 1;
+	unsigned char *values;
 	
+	if(isChar){
+		values = getFromChar(argv);
+	}else{
+		values = getFromInt(argc, argv);
+	}
+	if(showMessage){
+		printf("The utf8 code ");
+		printCode(values);
+		printf("represents the character ");
+		printCharacter(values);
+		printf(".\n");
+	}else{
+		if(isChar){
+			printCode(values);
+			printf("\n");
+		}else{
+			printCharacter(values);
+			printf("\n");
+		}
+	}
 	return 0;
 }
