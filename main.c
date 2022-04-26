@@ -1,6 +1,9 @@
 #include<stdio.h>
 
-void printCode(unsigned char *argv[]){
+char* getCode(unsigned char *argv[]){
+	unsigned char values[4] = {0,0,0,0};
+	unsigned char *val_ptr = values;
+
 	int size = 4;
 	if(argv[1][0] < 128){
 		size = 1;
@@ -12,14 +15,25 @@ void printCode(unsigned char *argv[]){
 		size = 4;
 	}
 	for(int i = 0; i < size; i++){
-		printf("%u ", argv[1][i]);
+		values[i] = argv[1][i];
 	}
-	printf("\n");
+	return val_ptr;
 }
 
+void printCode(unsigned char code[]){
+	for(int i = 0; i < 4; i++){
+		if(code[i]){
+			printf("%d ", code[i]);
+		}
+	}
+}
+
+void printCharacter(unsigned char code[]){
+	printf("%c%c%c%c", code[0], code[1], code[2], code[3]);
+}
 
 int main(int argc, unsigned char *argv[]){
-	printCode(&argv[0]);
-
+	printCode(getCode(&argv[0]));
+	
 	return 0;
 }
