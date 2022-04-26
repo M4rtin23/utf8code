@@ -46,12 +46,32 @@ void printCharacter(unsigned char code[]){
 
 int main(int argc, unsigned char *argv[]){
 	_Bool isChar = 1, showMessage = 1;
+	int position = -1;
+	for(int i = 1; i < argc; i++){
+		if(argv[i][0] != '-' && position == -1){
+			position = i-1;
+		}else{
+			switch(argv[i][1]){
+				case 'a':
+					showMessage = 1;
+					break;
+				case 'b':
+					showMessage = 0;
+					break;
+				case 'c':
+					isChar = 1;
+					break;
+				case 'u':
+					isChar = 0;
+					break;
+			}
+		}
+	}
 	unsigned char *values;
-	
 	if(isChar){
-		values = getFromChar(argv);
+		values = getFromChar(&argv[position]);
 	}else{
-		values = getFromInt(argc, argv);
+		values = getFromInt(argc-position, &argv[position]);
 	}
 	if(showMessage){
 		printf("The utf8 code ");
