@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-char* getCode(unsigned char *argv[]){
+char* getFromChar(unsigned char *argv[]){
 	unsigned char values[4] = {0,0,0,0};
 	unsigned char *val_ptr = values;
 
@@ -20,6 +20,18 @@ char* getCode(unsigned char *argv[]){
 	return val_ptr;
 }
 
+char* getFromInt(int argc, unsigned char *argv[]){
+	unsigned char values[4] = {0,0,0,0};
+	unsigned char *val_ptr = values;
+
+	for(int i = 1; i < argc; i++){
+		sscanf(argv[i], "%hhd", &values[i-1]);
+	}
+
+	return val_ptr;
+}
+
+
 void printCode(unsigned char code[]){
 	for(int i = 0; i < 4; i++){
 		if(code[i]){
@@ -33,7 +45,7 @@ void printCharacter(unsigned char code[]){
 }
 
 int main(int argc, unsigned char *argv[]){
-	printCode(getCode(&argv[0]));
+	printCode(getFromChar(&argv[0]));
 	
 	return 0;
 }
