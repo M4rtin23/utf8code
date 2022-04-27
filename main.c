@@ -61,32 +61,39 @@ int main(int argc, unsigned char *argv[]){
 				case 'c':
 					isChar = 1;
 					break;
+				case 'h':
+					argc = 0;
+					break;
 				case 'u':
 					isChar = 0;
 					break;
 			}
 		}
 	}
-	unsigned char *values;
-	if(isChar){
-		values = getFromChar(&argv[position]);
-	}else{
-		values = getFromInt(argc-position, &argv[position]);
-	}
-	if(showMessage){
-		printf("The utf8 code ");
-		printCode(values);
-		printf("represents the character ");
-		printCharacter(values);
-		printf(".\n");
-	}else{
+	if(argc > 1){
+		unsigned char *values;
 		if(isChar){
-			printCode(values);
-			printf("\n");
+			values = getFromChar(&argv[position]);
 		}else{
-			printCharacter(values);
-			printf("\n");
+			values = getFromInt(argc-position, &argv[position]);
 		}
+		if(showMessage){
+			printf("The UTF-8 code ");
+			printCode(values);
+			printf("represents the character ");
+			printCharacter(values);
+			printf(".\n");
+		}else{
+			if(isChar){
+				printCode(values);
+				printf("\n");
+			}else{
+				printCharacter(values);
+				printf("\n");
+			}
+		}
+	}else{
+		printf("\nUsage:\n\tutf8code [character|UTF-8 code] [options]\n\nOptions:\n\t-a\tShow the entire text\n\t-b\tPrint the bare output\n\t-c\tPrint the character\n\t-h\tShow the help menu\n\t-u\tPrint the UTF-8 code\n\n");
 	}
 	return 0;
 }
