@@ -1,3 +1,10 @@
-all:
+all: utf8code
+
+utf8code: main.c
 	gcc main.c -o utf8code
-	mv utf8code /usr/local/bin
+
+install: all
+	cp utf8code /usr/local/bin
+
+clean:
+	rm utf8code
