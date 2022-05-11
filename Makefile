@@ -7,4 +7,4 @@ install: all
 	cp utf8code /usr/local/bin
 
 clean:
-	rm utf8code
+	rm utf8code -f
