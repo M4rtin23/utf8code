@@ -6,5 +6,8 @@ utf8code: main.c
 install: all
 	cp utf8code /usr/local/bin
 
+uninstall:
+	rm -f /usr/local/bin/utf8code
+
 clean:
 	rm utf8code -f
